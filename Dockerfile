@@ -1,11 +1,12 @@
-FROM python:latest
+FROM ubuntu:22.04
 
-COPY requirements.txt requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+WORKDIR /RAAST
 
-RUN apt-get install python3-tk
-
-WORKDIR /software
 COPY . .
+
+RUN pip install simpylc
+RUN pip uninstall pyopengl
+RUN pip install PyOpengGL==3.1.5
+RUN apt-get install python3-tk
 
 CMD [ "python", "./Simulation/world.py" ]
